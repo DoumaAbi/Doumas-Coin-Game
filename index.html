@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Coin Collector 2D</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="signature">
+                <span>Made by Douma</span>
+            </div>
+            <h1>Ultimate Coin Collector 2D</h1>
+            <div class="game-info">
+                <div class="score">
+                    <i class="fas fa-coins"></i>
+                    Coins: <span id="coinCount">0</span>
+                </div>
+                <div class="level">
+                    <i class="fas fa-trophy"></i>
+                    Level: <span id="level">1</span>
+                </div>
+                <div class="speed">
+                    <i class="fas fa-bolt"></i>
+                    Speed: <span id="speed">1</span>
+                </div>
+                <div class="bomb-info">
+                    <i class="fas fa-bomb"></i>
+                    <span id="bombStatus">Ready</span>
+                    <div class="cooldown-bar">
+                        <div class="cooldown-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <div class="game-container">
+                <canvas id="gameCanvas" width="800" height="500"></canvas>
+                <div class="ui-container">
+                    <div class="ui-tabs">
+                        <button class="tab-btn active" data-tab="character">
+                            <i class="fas fa-user"></i> Character
+                        </button>
+                        <button class="tab-btn" data-tab="shop">
+                            <i class="fas fa-shopping-cart"></i> Shop
+                        </button>
+                        <button class="tab-btn" data-tab="controls">
+                            <i class="fas fa-gamepad"></i> Controls
+                        </button>
+                    </div>
+                    
+                    <div class="ui-content">
+                        <!-- Character Tab -->
+                        <div class="tab-content active" id="character-tab">
+                            <h3><i class="fas fa-palette"></i> Character Editor</h3>
+                            
+                            <div class="editor-section">
+                                <h4><i class="fas fa-fill-drip"></i> Body Color</h4>
+                                <div class="color-options">
+                                    <div class="color-option" data-color="#4CAF50" style="background-color: #4CAF50;"></div>
+                                    <div class="color-option" data-color="#2196F3" style="background-color: #2196F3;"></div>
+                                    <div class="color-option" data-color="#FF5722" style="background-color: #FF5722;"></div>
+                                    <div class="color-option" data-color="#9C27B0" style="background-color: #9C27B0;"></div>
+                                    <div class="color-option" data-color="#FFEB3B" style="background-color: #FFEB3B;"></div>
+                                    <div class="color-option" data-color="#795548" style="background-color: #795548;"></div>
+                                    <div class="color-option" data-color="#E91E63" style="background-color: #E91E63;"></div>
+                                    <div class="color-option" data-color="#00BCD4" style="background-color: #00BCD4;"></div>
+                                    <div class="color-option" data-color="#8BC34A" style="background-color: #8BC34A;"></div>
+                                    <div class="color-option" data-color="#FF9800" style="background-color: #FF9800;"></div>
+                                    <div class="color-option" data-color="#607D8B" style="background-color: #607D8B;"></div>
+                                    <div class="color-option" data-color="#673AB7" style="background-color: #673AB7;"></div>
+                                    <div class="color-option" data-color="#F44336" style="background-color: #F44336;"></div>
+                                    <div class="color-option" data-color="#009688" style="background-color: #009688;"></div>
+                                    <div class="color-option" data-color="#CDDC39" style="background-color: #CDDC39;"></div>
+                                    <div class="color-option special" data-color="rainbow" style="background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff);">
+                                        <span class="price-tag">200</span>
+                                    </div>
+                                    <div class="color-option special" data-color="darkmatter" style="background: linear-gradient(45deg, #000000, #4A235A, #8E44AD, #C39BD3);">
+                                        <span class="price-tag">300</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="editor-section">
+                                <h4><i class="fas fa-tshirt"></i> Accessories</h4>
+                                <div class="accessory-options">
+                                    <button class="accessory-btn" data-accessory="none">None</button>
+                                    <button class="accessory-btn" data-accessory="hat">Wizard Hat</button>
+                                    <button class="accessory-btn" data-accessory="glasses">Sunglasses</button>
+                                    <button class="accessory-btn" data-accessory="crown">Gold Crown</button>
+                                    <button class="accessory-btn" data-accessory="halo">Halo</button>
+                                    <button class="accessory-btn" data-accessory="mask">Ghost Mask</button>
+                                    <button class="accessory-btn" data-accessory="headphones">Headphones</button>
+                                    <button class="accessory-btn" data-accessory="wings">Angel Wings</button>
+                                    <button class="accessory-btn" data-accessory="cape">Hero Cape</button>
+                                    <button class="accessory-btn" data-accessory="jetpack">Jetpack</button>
+                                    <button class="accessory-btn" data-accessory="sword">Sword</button>
+                                    <button class="accessory-btn" data-accessory="shield">Shield</button>
+                                </div>
+                            </div>
+                            
+                            <div class="editor-section">
+                                <h4><i class="fas fa-smile"></i> Emotions</h4>
+                                <div class="emotion-options">
+                                    <button class="emotion-btn" data-emotion="happy">😊 Happy</button>
+                                    <button class="emotion-btn" data-emotion="sad">😢 Sad</button>
+                                    <button class="emotion-btn" data-emotion="angry">😠 Angry</button>
+                                    <button class="emotion-btn" data-emotion="surprised">😮 Surprised</button>
+                                    <button class="emotion-btn" data-emotion="cool">😎 Cool</button>
+                                    <button class="emotion-btn" data-emotion="laughing">😂 Laughing</button>
+                                    <button class="emotion-btn" data-emotion="sleepy">😴 Sleepy</button>
+                                    <button class="emotion-btn" data-emotion="devil">😈 Devil</button>
+                                    <button class="emotion-btn" data-emotion="love">😍 Love</button>
+                                    <button class="emotion-btn" data-emotion="robot">🤖 Robot</button>
+                                    <button class="emotion-btn" data-emotion="alien">👽 Alien</button>
+                                    <button class="emotion-btn" data-emotion="clown">🤡 Clown</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Shop Tab -->
+                        <div class="tab-content" id="shop-tab">
+                            <h3><i class="fas fa-store"></i> Shop</h3>
+                            
+                            <div class="shop-item">
+                                <div class="shop-info">
+                                    <h4><i class="fas fa-bolt"></i> Speed +</h4>
+                                    <p>Increases movement speed</p>
+                                    <div class="upgrade-progress">
+                                        <span>Level: <span id="speedLevel">1</span>/5</span>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="speedProgress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shop-cost">
+                                    <span><i class="fas fa-coins"></i> <span id="speedCost">10</span></span>
+                                    <button id="buySpeed" class="buy-btn">Buy</button>
+                                </div>
+                            </div>
+                            
+                            <div class="shop-item">
+                                <div class="shop-info">
+                                    <h4><i class="fas fa-magnet"></i> Coin Magnet</h4>
+                                    <p>Coins are automatically attracted</p>
+                                    <div class="upgrade-progress">
+                                        <span>Level: <span id="magnetLevel">0</span>/2</span>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="magnetProgress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shop-cost">
+                                    <span><i class="fas fa-coins"></i> <span id="magnetCost">120</span></span>
+                                    <button id="buyMagnet" class="buy-btn">Buy</button>
+                                </div>
+                            </div>
+                            
+                            <div class="shop-item">
+                                <div class="shop-info">
+                                    <h4><i class="fas fa-coins"></i> More Coins</h4>
+                                    <p>Increases number of coins on field</p>
+                                    <div class="upgrade-progress">
+                                        <span>Level: <span id="moreCoinsLevel">1</span>/10</span>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="moreCoinsProgress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shop-cost">
+                                    <span><i class="fas fa-coins"></i> <span id="moreCoinsCost">50</span></span>
+                                    <button id="buyMoreCoins" class="buy-btn">Buy</button>
+                                </div>
+                            </div>
+                            
+                            <div class="shop-item">
+                                <div class="shop-info">
+                                    <h4><i class="fas fa-bomb"></i> Coin Bomb</h4>
+                                    <p>Collects all coins in large radius (45s cooldown)</p>
+                                    <div class="ability-info">
+                                        <span>Status: <span id="bombShopStatus">Not purchased</span></span>
+                                    </div>
+                                </div>
+                                <div class="shop-cost">
+                                    <span><i class="fas fa-coins"></i> <span id="bombCost">400</span></span>
+                                    <button id="buyBomb" class="buy-btn">Buy</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Controls Tab -->
+                        <div class="tab-content" id="controls-tab">
+                            <h3><i class="fas fa-gamepad"></i> Controls</h3>
+                            <div class="control-keys">
+                                <div class="key">W</div>
+                                <div class="key-row">
+                                    <div class="key">A</div>
+                                    <div class="key">S</div>
+                                    <div class="key">D</div>
+                                </div>
+                            </div>
+                            <div class="ability-control">
+                                <h4><i class="fas fa-star"></i> Abilities</h4>
+                                <div class="key large-key">Q</div>
+                                <p>Activates Coin Bomb (when purchased)</p>
+                            </div>
+                            <div class="tips">
+                                <h4><i class="fas fa-lightbulb"></i> Tips</h4>
+                                <ul>
+                                    <li>Move fast to collect more coins</li>
+                                    <li>Buy speed first, then magnet</li>
+                                    <li>The bomb is powerful - use it wisely!</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="footer-content">
+                <p>Use WASD to move and collect as many coins as possible!</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Audio Elements -->
+    <audio id="coinSound" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=="></audio>
+    <audio id="clickSound" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=="></audio>
+    <audio id="buySound" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=="></audio>
+    <audio id="bombSound" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=="></audio>
+    
+    <script src="script.js"></script>
+</body>
+</html>
